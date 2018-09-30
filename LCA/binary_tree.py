@@ -48,9 +48,10 @@ class BinaryTree:
 
     def _print_tree(self, node):
         if node is not None:
-            self._print_tree(node.l)
-            print(str(node.v) + ' ')
-            self._print_tree(node.r)
+            self._print_tree(node.left)
+            print(str(node.value) + ' ', end='')
+            self._print_tree(node.right)
+            print('')
 
 
 class Node:
