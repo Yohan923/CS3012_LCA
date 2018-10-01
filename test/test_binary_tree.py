@@ -1,6 +1,4 @@
 import unittest
-import io
-import sys
 
 from LCA.binary_tree import BinaryTree
 
@@ -36,3 +34,8 @@ class TestBinaryTree(unittest.TestCase):
 
     def test_print_tree(self):
         self.ten_node_tree.print_tree()
+
+    def tearDown(self):
+        self.empty_tree = None
+        self.ten_node_tree = None
+        self.degenerative_tree = None
