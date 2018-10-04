@@ -8,7 +8,7 @@ class LCA:
 
         lca = self._find_lca(tree.root, a, b, exists)
 
-        if exists[0] and exists[1] or exists[0] and tree.find(a) or exists[1] and tree.find(b):
+        if exists[0] and exists[1] or exists[0] and tree.find(b) or exists[1] and tree.find(a):
             return lca
         else:
             return None

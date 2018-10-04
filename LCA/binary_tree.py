@@ -34,30 +34,46 @@ class BinaryTree:
         if value == node.value:
             return node
         elif value < node.value and node.left is not None:
-            self._find(value, node.left)
+            return self._find(value, node.left)
         elif value > node.value and node.right is not None:
-            self._find(value, node.right)
+            return self._find(value, node.right)
 
         return None
 
-    def print_tree(self):
+    def tree_to_str(self):
         if self.root is not None:
-            self._print_tree(self.root)
+            return self._tree_to_str(self.root, "")
         else:
-            print("tree is empty")
+            return "tree is empty"
 
-    def _print_tree(self, node):
+    def _tree_to_str(self, node, prefix):
         if node is not None:
-            self._print_tree(node.left)
-            print(str(node.value) + ' ', end='')
-            self._print_tree(node.right)
-            print('')
+            tree = prefix + "-" + str(node.value) + "\n"
+            tree = tree + self._tree_to_str(node.left, prefix + " |")
+            tree = tree + self._tree_to_str(node.right, prefix + "  ")
+            return tree
+        else:
+            return prefix + "-None" + "\n"
 
 
 class Node:
 
     def __init__(self, value):
-
         self.left = None
         self.right = None
         self.value = value
+
+
+def main():
+    ten_node_tree = BinaryTree()
+    file = open("../resources/ten_node_tree.txt", 'r')
+    values = file.readlines()
+    for x in values:
+        ten_node_tree.add(int(x.strip()))
+    file.close()
+
+    print(ten_node_tree.find(12))
+
+
+if __name__ == '__main__':
+    main()

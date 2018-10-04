@@ -21,13 +21,15 @@ class TestLCA(unittest.TestCase):
         file.close()
 
     def test_lca(self):
-        self.assertEqual(2, LCA().lca(self.ten_node_tree, 1, 2).value)
+        self.assertEqual(5, LCA().lca(self.ten_node_tree, 3, 12).value)
+
+        self.assertEqual(17, LCA().lca(self.ten_node_tree, 10, 85).value)
 
         self.assertEqual(None, LCA().lca(self.ten_node_tree, 1, 2))
 
         self.assertEqual(None, LCA().lca(self.empty_tree, 1, 2))
 
-        self.assertEqual(2, LCA().lca(self.degenerative_tree, 1, 2))
+        self.assertEqual(1, LCA().lca(self.degenerative_tree, 1, 2).value)
 
     def tearDown(self):
         self.empty_tree = None
