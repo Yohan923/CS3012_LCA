@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+bin/
+
 # C extensions
 *.so
 
@@ -112,3 +118,4 @@ dmypy.json
 
 # pycharm
 .idea/
+**/*.iml
