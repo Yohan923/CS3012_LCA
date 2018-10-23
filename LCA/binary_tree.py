@@ -7,11 +7,12 @@ class BinaryTree:
         return self.root
 
     def add(self, value):
-        if self.root is None:
-            self.root = Node(value)
-        else:
+        if self.root is not None:
             self._add(value, self.root)
+        else:
+            self.root = Node(value)
 
+    # recursively add node into tree
     def _add(self, value, node):
         if value < node.value:
             if node.left is not None:
@@ -30,6 +31,7 @@ class BinaryTree:
         else:
             return None
 
+    # recursively find node in tree
     def _find(self, value, node):
         if value == node.value:
             return node
@@ -46,6 +48,8 @@ class BinaryTree:
         else:
             return "tree is empty"
 
+    # recursively generate string  representing the tree in pretty printing starting with root
+    # each line contains exactly one node with chile nodes ordered left first
     def _tree_to_str(self, node, prefix):
         if node is not None:
             tree = prefix + "-" + str(node.value) + "\n"
@@ -62,18 +66,3 @@ class Node:
         self.left = None
         self.right = None
         self.value = value
-
-
-def main():
-    ten_node_tree = BinaryTree()
-    file = open("../resources/ten_node_tree.txt", 'r')
-    values = file.readlines()
-    for x in values:
-        ten_node_tree.add(int(x.strip()))
-    file.close()
-
-    print(ten_node_tree.find(12))
-
-
-if __name__ == '__main__':
-    main()
