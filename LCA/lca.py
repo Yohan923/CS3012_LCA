@@ -1,8 +1,26 @@
-from LCA.binary_tree import BinaryTree
+# from LCA.binary_tree import BinaryTree
 
 
 class LCA:
 
+    """
+    tries to find lca of two nodes in binary tree by determining whether the nodes exists in the subtrees starting at
+    node. The algorithm is as follows:
+    1. if root equals a then lca equals a similarly if root equals b then lca equals b, however only if the other
+    node is also present in the tree
+    2. if a and b are both in left subtree then lca is in left subtree
+    3. if a and b are both in right subtree then lca is in right subtree
+    4. if a and b are in each one of right and left subtree then the root is lca
+    :parameter
+    tree : root to binary tree. Binary tree structure only, however does not have protocols to identify binary trees
+    therefore there will be errors if something other than a binary tree is passed in
+    a : value of the first node, used to reference the representing node in binary tree
+    b : value of the second node, used to reference the representing node in binary tree
+
+    :returns
+    lca : Node object that is the lca of a and b if it exists else None
+
+    """
     def lca(self, tree, a, b):
         exists = [False, False]
 
@@ -34,6 +52,7 @@ class LCA:
         return left_node if left_node is not None else right_node
 
 
+"""
 def main():
     tree = BinaryTree()
     file = open("../resources/ten_node_tree.txt", "r")
@@ -52,3 +71,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""
