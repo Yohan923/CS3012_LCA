@@ -8,6 +8,8 @@ class LCA_Dag:
             if nx.is_directed_acyclic_graph(graph):
                 anc_a = nx.ancestors(graph, a)
                 anc_b = nx.ancestors(graph, b)
+                anc_a.add(a)
+                anc_b.add(b)
 
                 common_anc = anc_a.intersection(anc_b)
                 lcas = list()
@@ -23,8 +25,8 @@ class LCA_Dag:
                             lcas.append(i)
                     else:
                         min_path = t
-
-
+                        lcas.append(i)
+                return lcas
             else:
                 return "graph is not dag"
         else:
@@ -32,10 +34,17 @@ class LCA_Dag:
 
 
 def main():
-    G = nx.Graph()
-    G.add_node(1)
+    G = nx.DiGraph()
+    edges = list()
+    file = open("../resources/ten_node_dag.txt", 'r')
+    for lines in file:
+        values = lines.split(" ")
+        edges.append(tuple(values))
+    file.close()
 
-    print(list(nx.connected_components(G)))
+    G.add_weighted_edges_from(edges)
+
+    print(LCA_Dag().find_lca(G, "12", "14"))
 
 
 if __name__ == '__main__':
