@@ -35,6 +35,8 @@ class TestLCA(unittest.TestCase):
         self.assertEqual(None, LCA().lca(self.empty_tree, 1, 2))
         # testing lca in a degenerative tree
         self.assertEqual(1, LCA().lca(self.degenerative_tree, 1, 2).value)
+        # testing data structure that is not a tree
+        self.assertEqual("binary tree structures is not as defined", LCA().lca(object(), 1, 2))
 
     # clean up
     def tearDown(self):

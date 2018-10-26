@@ -1,4 +1,4 @@
-# from LCA.binary_tree import BinaryTree
+from LCA.binary_tree import BinaryTree
 
 
 class LCA:
@@ -19,17 +19,33 @@ class LCA:
 
     :returns
     lca : Node object that is the lca of a and b if it exists else None
+    error : error message if tree is not a binary tree as defined
+
+    BinaryTree() class definition:
+    def __init__(self):
+        self.root = None
+
+    Node class definition:
+    def __init__(self, value):
+        self.left = None
+        self.right = None
+        self.value = value
+
 
     """
     def lca(self, tree, a, b):
-        exists = [False, False]
 
-        lca = self._find_lca(tree.root, a, b, exists)
+        if isinstance(tree, BinaryTree):
+            exists = [False, False]
 
-        if exists[0] and exists[1] or exists[0] and tree.find(b) or exists[1] and tree.find(a):
-            return lca
+            lca = self._find_lca(tree.root, a, b, exists)
+
+            if exists[0] and exists[1] or exists[0] and tree.find(b) or exists[1] and tree.find(a):
+                return lca
+            else:
+                return None
         else:
-            return None
+            return "binary tree structures is not as defined"
 
     def _find_lca(self, root, a, b, exists):
         if root is None:
