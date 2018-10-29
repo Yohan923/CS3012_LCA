@@ -1,6 +1,6 @@
 import unittest
 import networkx as nx
-from LCA.lca_dag import LCA_Dag
+from LCA.lca_dag import LcaDag
 
 
 class TestLcaDag(unittest.TestCase):
@@ -33,16 +33,18 @@ class TestLcaDag(unittest.TestCase):
 
     def test_find_lca(self):
         # test normal case with only one lca for inputs a, b
-        self.assertEqual(["12"], LCA_Dag().find_lca(self.ten_node_dag, "14", "12"))
+        self.assertEqual(["12"], LcaDag().find_lca(self.ten_node_dag, "14", "12"))
+        # test normal case with a == b
+        self.assertEqual(["12"], LcaDag().find_lca(self.ten_node_dag, "12", "12"))
         # test normal case with multiple lcas for inputs a, b
-        result = LCA_Dag().find_lca(self.ten_node_dag, "9", "10")
+        result = LcaDag().find_lca(self.ten_node_dag, "9", "10")
         result = set(result)
         expected = {"6", "8"}
         self.assertEqual(set(), expected.difference(result))
         # test cases when one or two nodes are not found in the graph
-        self.assertEqual("The node 0 is not in the graph.", str(LCA_Dag().find_lca(self.ten_node_dag, "0", "12")))
-        self.assertEqual("The node 0 is not in the graph.", str(LCA_Dag().find_lca(self.ten_node_dag, "12", "0")))
+        self.assertEqual("The node 0 is not in the graph.", LcaDag().find_lca(self.ten_node_dag, "0", "12"))
+        self.assertEqual("The node 0 is not in the graph.", LcaDag().find_lca(self.ten_node_dag, "12", "0"))
         # test case where the graph is not a dag ie. directed graph with cycles
-        self.assertEqual("graph is not dag", LCA_Dag().find_lca(self.cyclic_directed_graph, "1", "2"))
+        self.assertEqual("graph is not dag", LcaDag().find_lca(self.cyclic_directed_graph, "1", "2"))
         # test empty graph
-        self.assertEqual("graph is empty", LCA_Dag().find_lca(self.empty_dag, "1", "12"))
+        self.assertEqual("graph is empty", LcaDag().find_lca(self.empty_dag, "1", "12"))
