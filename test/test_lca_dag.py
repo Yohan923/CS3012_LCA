@@ -28,6 +28,17 @@ class TestLcaDag(unittest.TestCase):
         g.add_weighted_edges_from(edges)
         self.cyclic_directed_graph = g
 
+        # read data to create disjoint directed graphs
+        g = nx.DiGraph()
+        edges = list()
+        file = open("../resources/disjoint_dag.txt", 'r')
+        for lines in file:
+            values = lines.split(" ")
+            edges.append(tuple(values))
+        file.close()
+        g.add_weighted_edges_from(edges)
+        self.disjoint_dag = g
+
         # create empty graph
         self.empty_dag = nx.DiGraph()
 
@@ -46,5 +57,7 @@ class TestLcaDag(unittest.TestCase):
         self.assertEqual("The node 0 is not in the graph.", LcaDag().find_lca(self.ten_node_dag, "12", "0"))
         # test case where the graph is not a dag ie. directed graph with cycles
         self.assertEqual("graph is not dag", LcaDag().find_lca(self.cyclic_directed_graph, "1", "2"))
+        # test vertices for disjoint graphs ie, no common ancestors can be found
+        self.assertEqual("no lcas can be found", LcaDag().find_lca(self.disjoint_dag, "2", "7"))
         # test empty graph
         self.assertEqual("graph is empty", LcaDag().find_lca(self.empty_dag, "1", "12"))
