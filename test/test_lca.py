@@ -10,7 +10,7 @@ class TestLCA(unittest.TestCase):
         self.empty_tree = BinaryTree()
 
         self.degenerative_tree = BinaryTree()
-        file = open("../resources/one_child_node.txt", 'r')
+        file = open("../resources/one_child_tree.txt", 'r')
         values = file.readlines()
         for x in values:
             self.degenerative_tree.add(int(x.strip()))
